@@ -68,7 +68,7 @@ http {
 		#server  community.elasa.ir;
 		#server free-papers.elasa.ir;
 		#server  diy4tornado-tornado4ss.rhcloud.com weight=1;
-		server diy-tornado4ss.rhcloud.com;
+		server diy-tornado4ss.rhcloud.com  fail_timeout=3 ;
 		server diy2-elasa2.rhcloud.com backup;
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
@@ -109,9 +109,6 @@ http {
 		location ~* ^/(.*) {
             #root   html;
             #index  index.html index.htm;
-			 
-			
-			
 			proxy_set_header Host  diy-tornado4ss.rhcloud.com;
 			#proxy_set_header Host  $upstream_addr;
 			proxy_pass_header Server;
