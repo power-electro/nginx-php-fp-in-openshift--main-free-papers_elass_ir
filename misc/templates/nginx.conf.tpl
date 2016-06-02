@@ -114,8 +114,8 @@ http {
 
         }
 		
-		location  ~* ^/(.*) {
-    
+		#location  ~* ^/(.*) {
+		location afffter {
 		 proxy_pass_header on;
       proxy_set_header Host $served_host2;
       proxy_pass http://index/$1$is_args$args;
@@ -127,8 +127,8 @@ http {
       #sub_filter_types application/json;
 		}
 		
-		#location ~* ^/(.*) {
-		location beffor {
+		location ~* ^/(.*) {
+		#location beffor {
             #root   html;
             #index  index.html index.htm;
 			proxy_set_header Host  $served_host2;
