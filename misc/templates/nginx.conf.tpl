@@ -68,7 +68,8 @@ http {
 		#server  community.elasa.ir;
 		#server free-papers.elasa.ir;
 		#server  diy4tornado-tornado4ss.rhcloud.com weight=1;
-		server diy-tornado4ss.rhcloud.com weight=1;
+		server diy-tornado4ss.rhcloud.com;
+		server diy2-elasa2.rhcloud.com backup;
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
@@ -111,8 +112,10 @@ http {
 			 
 			
 			
-			#proxy_set_header Host  vb2-fishsmarkets.rhcloud.com;
-			proxy_set_header Host  $upstream_addr;
+			#proxy_set_header Host  diy2-elasa2.rhcloud.com;
+			#proxy_set_header Host  $upstream_addr;
+			proxy_pass_header Server;
+            #proxy_set_header Host $proxy_host;
 			#proxy_redirect  http://vb2-fishsmarkets.rhcloud.com/ http://community.elasa.ir/;
 			#proxy_redirect  http://fm.elasa.ir/ http://community.elasa.ir/;
 			proxy_pass http://index/$1$is_args$args;
