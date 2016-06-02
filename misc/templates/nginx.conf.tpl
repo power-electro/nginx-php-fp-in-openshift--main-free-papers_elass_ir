@@ -109,16 +109,10 @@ http {
             #root   html;
             #index  index.html index.htm;
 			 
-			rewrite_by_lua '
-                        local upstreams = {
-                                "diy-tornado4ss.rhcloud.com",                                
-                                "http://web4.dokku.localdomain"
-                        }
-                        ngx.var.upstream = upstreams[ math.random( #upstreams ) ] 
-                ';
+			
 			
 			#proxy_set_header Host  vb2-fishsmarkets.rhcloud.com;
-			proxy_set_header Host  $upstreams;
+			proxy_set_header Host  $upstream_addr;
 			#proxy_redirect  http://vb2-fishsmarkets.rhcloud.com/ http://community.elasa.ir/;
 			#proxy_redirect  http://fm.elasa.ir/ http://community.elasa.ir/;
 			proxy_pass http://index/$1$is_args$args;
