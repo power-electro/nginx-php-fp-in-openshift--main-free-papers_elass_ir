@@ -68,9 +68,16 @@ http {
 		#server  community.elasa.ir;
 		#server free-papers.elasa.ir;
 		#server  diy4tornado-tornado4ss.rhcloud.com weight=1;
-		server diy-tornado4ss.rhcloud.com  fail_timeout=3 ;
+		server diy-tornado4ss.rhcloud.com  ;#fail_timeout=3 ;
 		server diy2-elasa2.rhcloud.com backup;
 	}
+	
+	map_hash_bucket_size 128;
+	map $http_host $served_host2 {
+    default diy2-elasa2.rhcloud.com;
+    diy-tornado4ss.rhcloud.com  diy2-elasa2.rhcloud.com;
+	}
+	
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
@@ -109,7 +116,7 @@ http {
 		location ~* ^/(.*) {
             #root   html;
             #index  index.html index.htm;
-			proxy_set_header Host  diy-tornado4ss.rhcloud.com;
+			proxy_set_header Host  $served_host2;
 			#proxy_set_header Host  $upstream_addr;
 			proxy_pass_header Server;
             #proxy_set_header Host $proxy_host;
