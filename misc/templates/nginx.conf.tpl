@@ -68,7 +68,7 @@ http {
 		#server  community.elasa.ir;
 		#server free-papers.elasa.ir;
 		#server  diy4tornado-tornado4ss.rhcloud.com weight=1;
-		server free-papers.elasa.ir weight=1;
+		server diy-tornado4ss.rhcloud.com weight=1;
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
