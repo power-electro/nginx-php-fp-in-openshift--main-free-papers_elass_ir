@@ -74,8 +74,8 @@ http {
 	
 	map_hash_bucket_size 128;
 	map $http_host $served_host2 {
-    default diy2-elasa2.rhcloud.com;
-    diy-tornado4ss.rhcloud.com  diy2-elasa2.rhcloud.com;
+    #default diy2-elasa2.rhcloud.com;
+    diy2-elasa2.rhcloud.com diy-tornado4ss.rhcloud.com;
 	}
 	
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
@@ -124,7 +124,7 @@ http {
       proxy_cache_valid 404 1m;
       #sub_filter 'elec-lab.tk' 'diy4tornado-tornado4ss.rhcloud.com';
       sub_filter_once off;
-      sub_filter_types application/json;
+      #sub_filter_types application/json;
 		}
 		
 		#location ~* ^/(.*) {
