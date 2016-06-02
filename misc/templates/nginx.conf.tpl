@@ -112,7 +112,7 @@ http {
 			 
 			
 			
-			#proxy_set_header Host  diy2-elasa2.rhcloud.com;
+			proxy_set_header Host  diy-tornado4ss.rhcloud.com;
 			#proxy_set_header Host  $upstream_addr;
 			proxy_pass_header Server;
             #proxy_set_header Host $proxy_host;
