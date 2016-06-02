@@ -59,7 +59,7 @@ http {
 		server {{OPENSHIFT_INTERNAL_IP}}:15003 weight=3;
 		
     }
-	upstream comment {
+	upstream index {
 		#server vb-fishsmarkets.rhcloud.com;
 		#server vb.elasa.ir;
 		#server  vb-elasa3.rhcloud.com ;
@@ -70,7 +70,7 @@ http {
 		#server  diy4tornado-tornado4ss.rhcloud.com weight=1;
 		server free-papers.elasa.ir weight=1;
 	}
-	imit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
+	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
 	proxy_cache_path  /tmp  levels=1:2    keys_zone=RUBYGEMS:10m  inactive=24h  max_size=1g;
@@ -114,7 +114,7 @@ http {
 			proxy_set_header Host  free-papers.elasa.ir;
 			#proxy_redirect  http://vb2-fishsmarkets.rhcloud.com/ http://community.elasa.ir/;
 			#proxy_redirect  http://fm.elasa.ir/ http://community.elasa.ir/;
-			proxy_pass http://comment/$1$is_args$args;
+			proxy_pass http://index/$1$is_args$args;
 			proxy_set_header  X-Real-IP  $remote_addr;
             #proxy_set_header X-Scheme $scheme;
 			#sub_filter 'href="http://fm.elasa.ir/'  'href="http://community.elasa.ir/';
@@ -262,6 +262,57 @@ http {
 		
 		
 
+        
+		location ~ \.php$ {
+
+        if (!-f $request_filename) {
+        rewrite ^/(.*)$ /index.php?routestring=$1 break;
+        }
+    
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass   {{OPENSHIFT_INTERNAL_IP}}:9000;
+    #fastcgi_pass   unix:/tmp/php5-fpm.sock;
+    fastcgi_index  index.php;
+    #fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    fastcgi_param  SCRIPT_FILENAME    $request_filename;
+
+fastcgi_connect_timeout 60;
+fastcgi_send_timeout 180;
+fastcgi_read_timeout 180;
+fastcgi_buffer_size 256k;
+fastcgi_buffers 4 256k;
+fastcgi_busy_buffers_size 256k;
+fastcgi_temp_file_write_size 256k;
+fastcgi_intercept_errors on;
+#fastcgi_param HTTPS on;
+
+fastcgi_param  PATH_INFO          $fastcgi_path_info;
+fastcgi_param  PATH_TRANSLATED    $document_root$fastcgi_path_info;
+
+fastcgi_param  QUERY_STRING       $query_string;
+fastcgi_param  REQUEST_METHOD     $request_method;
+fastcgi_param  CONTENT_TYPE       $content_type;
+fastcgi_param  CONTENT_LENGTH     $content_length;
+
+fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
+fastcgi_param  REQUEST_URI        $request_uri;
+fastcgi_param  DOCUMENT_URI       $document_uri;
+fastcgi_param  DOCUMENT_ROOT      $document_root;
+fastcgi_param  SERVER_PROTOCOL    $server_protocol;
+
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
+#fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+
+fastcgi_param  REMOTE_ADDR        $remote_addr;
+fastcgi_param  REMOTE_PORT        $remote_port;
+fastcgi_param  SERVER_ADDR        $server_addr;
+fastcgi_param  SERVER_PORT        $server_port;
+fastcgi_param  SERVER_NAME        $server_name;
+
+# PHP only, required if PHP was built with --enable-force-cgi-redirect
+fastcgi_param  REDIRECT_STATUS    200;
+
+}
         #error_page  404              /404.html;
 
         # redirect server error pages to the static page /50x.html
@@ -279,13 +330,38 @@ http {
 
         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
         #
-        location ~ \.php$ {
-            root           html;
-            fastcgi_pass   {{OPENSHIFT_INTERNAL_IP}}:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-            include        fastcgi_params;
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+		 location ~ \.php1$ {
+                # handles legacy scripts
+                if (!-f $request_filename) {
+                        rewrite ^/(.*)$ /index.php?routestring=$1 break;
+                }
+
+                fastcgi_split_path_info ^(.+\.php)(.*)$;
+                fastcgi_pass   {{OPENSHIFT_INTERNAL_IP}}:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+                fastcgi_param QUERY_STRING $query_string;
+                fastcgi_param REQUEST_METHOD $request_method;
+                fastcgi_param CONTENT_TYPE $content_type;
+                fastcgi_param CONTENT_LENGTH $content_length;
+                fastcgi_intercept_errors on;
+                fastcgi_ignore_client_abort off;
+                fastcgi_connect_timeout 60;
+                fastcgi_send_timeout 180;
+                fastcgi_read_timeout 180;
+                fastcgi_buffers 256 16k;
+                fastcgi_buffer_size 32k;
+                fastcgi_temp_file_write_size 256k;
         }
+
 
         # deny access to .htaccess files, if Apache's document root
         # concurs with nginx's one
@@ -313,18 +389,17 @@ http {
     # HTTPS server
     #
     #server {
-    #    listen       443;
+    #    listen       443 ssl;
     #    server_name  localhost;
 
-    #    ssl                  on;
     #    ssl_certificate      cert.pem;
     #    ssl_certificate_key  cert.key;
 
+    #    ssl_session_cache    shared:SSL:1m;
     #    ssl_session_timeout  5m;
 
-    #    ssl_protocols  SSLv2 SSLv3 TLSv1;
     #    ssl_ciphers  HIGH:!aNULL:!MD5;
-    #    ssl_prefer_server_ciphers   on;
+    #    ssl_prefer_server_ciphers  on;
 
     #    location / {
     #        root   html;
@@ -333,3 +408,4 @@ http {
     #}
 
 }
+
