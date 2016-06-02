@@ -74,7 +74,7 @@ http {
 	
 	map_hash_bucket_size 128;
 	map $http_host $served_host2 {
-    #default diy2-elasa2.rhcloud.com;
+    default diy2-elasa2.rhcloud.com;
     diy2-elasa2.rhcloud.com diy-tornado4ss.rhcloud.com;
 	}
 	
