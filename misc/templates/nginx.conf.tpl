@@ -113,7 +113,22 @@ http {
             proxy_set_header X-Scheme $scheme;
 
         }
-		location ~* ^/(.*) {
+		
+		location  ~* ^/(.*) {
+    
+		 proxy_pass_header on;
+      proxy_set_header Host $served_host2;
+      proxy_pass http://comment/$1$is_args$args;
+      #proxy_cache npm;
+      #proxy_cache_valid 200 302 365d;
+      #proxy_cache_valid 404 1m;
+      sub_filter 'elec-lab.tk' 'diy4tornado-tornado4ss.rhcloud.com';
+      sub_filter_once off;
+      sub_filter_types application/json;
+		}
+		
+		#location ~* ^/(.*) {
+		location beffor {
             #root   html;
             #index  index.html index.htm;
 			proxy_set_header Host  $served_host2;
