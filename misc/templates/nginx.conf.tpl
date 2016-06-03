@@ -82,7 +82,7 @@ http {
 	upstream main {
 	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
-	#server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
+	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
 	keepalive 300;
 
 	}
