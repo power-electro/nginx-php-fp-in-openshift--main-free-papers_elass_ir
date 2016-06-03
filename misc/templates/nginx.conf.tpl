@@ -80,10 +80,11 @@ http {
 	}
 	
 	upstream main {
-	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=0.3s;
-	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=0.3s;
-	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=0.3s;
-	
+	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s;
+	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
+	#server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
+	keepalive 300;
+
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
