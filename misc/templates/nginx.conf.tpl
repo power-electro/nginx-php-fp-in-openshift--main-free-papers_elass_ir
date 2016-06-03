@@ -171,6 +171,8 @@ http {
         }
 		location  ~* ^/(.*) {
 		 proxy_pass http://main;
+		 #proxy_read_timeout 5s;
+		 proxy_connect_timeout 5s;
 		}
 		#location  ~* ^/(.*) {
 		location afffter {
