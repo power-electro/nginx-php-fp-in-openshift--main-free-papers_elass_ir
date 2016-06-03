@@ -80,9 +80,9 @@ http {
 	}
 	
 	upstream main {
-	server {{OPENSHIFT_INTERNAL_IP}}:15010;
-	server {{OPENSHIFT_INTERNAL_IP}}:15011 backup fail_timeout=1;
-	server {{OPENSHIFT_INTERNAL_IP}}:15012 backup fail_timeout=1;
+	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1 max_conns=3;
+	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=2 fail_timeout=1 max_conns=3;
+	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=3 fail_timeout=1 max_conns=3;
 	
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
