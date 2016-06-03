@@ -83,6 +83,8 @@ http {
 	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
+	server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
+
 	keepalive 300;
 
 	}
@@ -97,6 +99,9 @@ http {
   location ~* ^/(.*) {
     proxy_pass       http://diy-tornado4ss.rhcloud.com;
     proxy_set_header Host diy-tornado4ss.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	
@@ -106,6 +111,9 @@ http {
   location ~* ^/(.*) {
     proxy_pass       http://diy2-elasa2.rhcloud.com;
     proxy_set_header Host diy2-elasa2.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	server {
@@ -114,10 +122,23 @@ http {
   location ~* ^/(.*) {
     proxy_pass       http://diy-phantomjs4so.rhcloud.com;
     proxy_set_header Host diy-phantomjs4so.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	
-	
+	server {
+  listen      {{OPENSHIFT_INTERNAL_IP}}:15013;
+  server_name diy2-elasa2.rhcloud.com;
+  location ~* ^/(.*) {
+    proxy_pass       http://diy2-elasa2.rhcloud.com;
+    proxy_set_header Host diy2-elasa2.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
+	}
+	}
     server {
         listen      {{OPENSHIFT_INTERNAL_IP}}:{{OPENSHIFT_INTERNAL_PORT}};
         server_name  {{OPENSHIFT_GEAR_DNS}} www.{{OPENSHIFT_GEAR_DNS}};
