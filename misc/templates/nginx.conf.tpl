@@ -80,9 +80,9 @@ http {
 	}
 	
 	upstream main {
-	server 127.0.0.1:8001;
-	server 127.0.0.1:8002 backup fail_timeout=1;
-	server 127.0.0.1:8003 backup fail_timeout=1;
+	server {{OPENSHIFT_INTERNAL_IP}}:15010;
+	server {{OPENSHIFT_INTERNAL_IP}}:15011 backup fail_timeout=1;
+	server {{OPENSHIFT_INTERNAL_IP}}:15012 backup fail_timeout=1;
 	
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
@@ -130,7 +130,7 @@ http {
 
         #access_log  logs/host.access.log  main;
 
-        location /main {
+        location /main0 {
             root   {{OPENSHIFT_REPO_DIR}};
             index  index.html index.htm;
 			try_files $uri $uri/ =404;
