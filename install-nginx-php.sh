@@ -368,7 +368,7 @@ nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin/nginx -c  ${OPENSHIFT
 nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/php-${PHP_VERSION}/sbin/php-fpm  > $OPENSHIFT_LOG_DIR/php_run.log 2>&1 & 
 #bash -i -c 'tail -f $OPENSHIFT_LOG_DIR/php_run.log'
 
-if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
+if [  -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
   
 	mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3
 	rm  -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3/*
