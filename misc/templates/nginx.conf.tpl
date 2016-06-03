@@ -79,10 +79,43 @@ http {
     diy2-elasa2.rhcloud.com diy-tornado4ss.rhcloud.com;
 	}
 	
+	upstream main {
+	server 127.0.0.1:8001;
+	server 127.0.0.1:8002 backup fail_timeout=1;
+	server 127.0.0.1:8003 backup fail_timeout=1;
+	
+	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
 	proxy_cache_path  /tmp  levels=1:2    keys_zone=RUBYGEMS:10m  inactive=24h  max_size=1g;
+	
+	server {
+  listen      {{OPENSHIFT_INTERNAL_IP}}:15010;
+  server_name diy-tornado4ss.rhcloud.com;
+  location ~* ^/(.*) {
+    proxy_pass       http://diy-tornado4ss.rhcloud.com;
+    proxy_set_header Host diy-tornado4ss.rhcloud.com;
+	}
+	}
+	
+	server {
+  listen      {{OPENSHIFT_INTERNAL_IP}}:15011;
+  server_name diy2-elasa2.rhcloud.com;
+  location ~* ^/(.*) {
+    proxy_pass       http://diy2-elasa2.rhcloud.com;
+    proxy_set_header Host diy2-elasa2.rhcloud.com;
+	}
+	}
+	server {
+  listen      {{OPENSHIFT_INTERNAL_IP}}:15012;
+  server_name diy-phantomjs4so.rhcloud.com;
+  location ~* ^/(.*) {
+    proxy_pass       http://diy-phantomjs4so.rhcloud.com;
+    proxy_set_header Host diy-phantomjs4so.rhcloud.com;
+	}
+	}
+	
 	
     server {
         listen      {{OPENSHIFT_INTERNAL_IP}}:{{OPENSHIFT_INTERNAL_PORT}};
@@ -114,7 +147,9 @@ http {
             proxy_set_header X-Scheme $scheme;
 
         }
-		
+		location  ~* ^/(.*) {
+		 proxy_pass http://main;
+		}
 		#location  ~* ^/(.*) {
 		location afffter {
 		 proxy_pass_header on;
@@ -128,8 +163,8 @@ http {
       #sub_filter_types application/json;
 		}
 		
-		location ~* ^/(.*) {
-		#location beffor {
+		#location ~* ^/(.*) {
+		location beffor {
             #root   html;
             #index  index.html index.htm;
 			proxy_set_header Host  $served_host2;
