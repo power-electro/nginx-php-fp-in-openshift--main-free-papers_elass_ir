@@ -29,4 +29,4 @@ fi
 # Always succeed, otherwise OpenShift declines to run build and start
 # hooks.
 exit 0
-exit 0
+#exit 0
