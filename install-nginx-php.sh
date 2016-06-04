@@ -389,6 +389,7 @@ chmod 755 -R .
 echo "ls from dial cron folder"
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily && ls
 
+cd $OPENSHIFT_TMP_DIR
 cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/stop ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
 cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/start ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
 chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
