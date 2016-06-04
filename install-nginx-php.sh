@@ -372,6 +372,9 @@ cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-fr
 chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
 chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
 
+cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/cron/* ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/cron
+cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/cron
+chmod 755 -R .
 if [ -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
   
 	mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3
