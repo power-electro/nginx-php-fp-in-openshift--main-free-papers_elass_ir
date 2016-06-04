@@ -81,7 +81,7 @@ http {
 	}
 	
 	upstream main {
-	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s;
+	#server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s; #diy-tornado4ss.rhcloud.com
 	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
 	#server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
