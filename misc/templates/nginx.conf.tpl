@@ -99,7 +99,7 @@ http {
   server_name diy-tornado4ss.rhcloud.com;
   location ~* ^/(.*) {
   if ($status != "503") {
-	if ($status != "500") {
+		if ($status != "500") {
 		 proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		}
 		if ($status = "500") {
