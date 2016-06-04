@@ -30,9 +30,10 @@ http {
     sendfile        on;
     #tcp_nopush     on;
 
-    keepalive_timeout  0;
-    #keepalive_timeout  265;
-
+    #keepalive_timeout  0;
+    keepalive_timeout  465;
+	#proxy_connect_timeout 5s;
+	
     gzip  on;
 	gzip_min_length 1000;
 	gzip_proxied expired no-cache no-store private auth;
@@ -85,7 +86,7 @@ http {
 	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
 
-	keepalive 300;
+	keepalive 100;
 
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
