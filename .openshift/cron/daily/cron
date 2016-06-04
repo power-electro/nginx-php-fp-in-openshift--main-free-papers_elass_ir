@@ -5,5 +5,5 @@ chmod 755 $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_
 cd $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir && ./install-nginx-php.sh
 
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
-chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/d*/*
+chmod 755 -R ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
 chmod 755 -R .

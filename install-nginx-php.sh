@@ -375,7 +375,7 @@ chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/sto
 rm -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/*
 mv  ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/cron/*. ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/*.
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
-chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
+chmod 755 -R ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
 chmod 755 -R .
 
 if [ -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
