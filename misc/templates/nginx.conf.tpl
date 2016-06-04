@@ -100,16 +100,15 @@ http {
   location ~* ^/(.*) {
   if ($status != "503") {
 			 proxy_pass       http://diy-tornado4ss.rhcloud.com;
-			 proxy_set_header Host diy-tornado4ss.rhcloud.com;
-			proxy_cache RUBYGEMS;
-			proxy_cache_valid 200 302 365d;
-			proxy_cache_valid 404 1m;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
 		}
     #proxy_pass       http://diy-tornado4ss.rhcloud.com;
-    
+    proxy_set_header Host diy-tornado4ss.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	
@@ -119,16 +118,15 @@ http {
   location ~* ^/(.*) {
   if ($status != "503") {
 			proxy_pass http://diy2-elasa2.rhcloud.com;
-			proxy_set_header Host diy2-elasa2.rhcloud.com;
-			proxy_cache RUBYGEMS;
-			proxy_cache_valid 200 302 365d;
-			proxy_cache_valid 404 1m;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
 		}
     
-    
+    proxy_set_header Host diy2-elasa2.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	server {
@@ -137,15 +135,14 @@ http {
   location ~* ^/(.*) {
 	if ($status != "503") {
 			proxy_pass       http://diy-phantomjs4so.rhcloud.com;
-			proxy_set_header Host diy-phantomjs4so.rhcloud.com;
-			proxy_cache RUBYGEMS;
-			proxy_cache_valid 200 302 365d;
-			proxy_cache_valid 404 1m;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
 		}
-    
+    proxy_set_header Host diy-phantomjs4so.rhcloud.com;
+	proxy_cache RUBYGEMS;
+      proxy_cache_valid 200 302 365d;
+      proxy_cache_valid 404 1m;
 	}
 	}
 	
