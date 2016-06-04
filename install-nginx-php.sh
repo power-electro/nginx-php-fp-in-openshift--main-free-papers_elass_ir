@@ -369,6 +369,8 @@ nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/php-${PHP_VERSION}/sbin/php-fpm 
 #bash -i -c 'tail -f $OPENSHIFT_LOG_DIR/php_run.log'
 
 #rm -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/*
+cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
+mkdir daily && mkdir hourly && mkdir minutely && mkdir monthly && mkdir weekly
 cp  -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/cron/. ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
 chmod 755 -R ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
