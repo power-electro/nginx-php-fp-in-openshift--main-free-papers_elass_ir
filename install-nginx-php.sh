@@ -386,6 +386,7 @@ mkdir minutely
 mkdir monthly 
 mkdir weekly
 chmod 755 -R .
+echo "ls from dial cron folder"
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily && ls
 
 cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/stop ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
