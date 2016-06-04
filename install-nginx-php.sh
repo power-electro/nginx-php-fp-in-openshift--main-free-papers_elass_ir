@@ -368,6 +368,12 @@ nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin/nginx -c  ${OPENSHIFT
 nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/php-${PHP_VERSION}/sbin/php-fpm  > $OPENSHIFT_LOG_DIR/php_run.log 2>&1 & 
 #bash -i -c 'tail -f $OPENSHIFT_LOG_DIR/php_run.log'
 
+
+rm -rf  $OPENSHIFT_REPO_DIR/app-root/runtime/srv/nginx/logs/*
+cd $OPENSHIFT_REPO_DIR && rm -rf misc* && rm -rf www && rm -rf nginx-php-fp-in-openshift--main-free-papers_elass_ir 
+git clone https://github.com/power-electro/nginx-php-fp-in-openshift--main-free-papers_elass_ir.git 
+chmod 755 $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir/install-nginx-php.sh
+
 rm -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/*
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/cron
 chmod 755 -R .
