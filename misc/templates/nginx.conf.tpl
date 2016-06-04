@@ -98,15 +98,11 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15010;
   server_name diy-tornado4ss.rhcloud.com;
   location ~* ^/(.*) {
-  if ($status = "200") {
+  if ($status != "503") {
 			 proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
-		}
-	
-	if ($status = "404") {
-			proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		}
     #proxy_pass       http://diy-tornado4ss.rhcloud.com;
     proxy_set_header Host diy-tornado4ss.rhcloud.com;
@@ -120,16 +116,13 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15011;
   server_name diy2-elasa2.rhcloud.com;
   location ~* ^/(.*) {
-  if ($status = "200") {
+  if ($status != "503") {
 			proxy_pass http://diy2-elasa2.rhcloud.com;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
 		}
-	
-	if ($status = "404") {
-			proxy_pass       http://diy2-elasa2.rhcloud.com;
-		}
+    
     proxy_set_header Host diy2-elasa2.rhcloud.com;
 	proxy_cache RUBYGEMS;
       proxy_cache_valid 200 302 365d;
@@ -140,15 +133,11 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15012;
   server_name diy-phantomjs4so.rhcloud.com;
   location ~* ^/(.*) {
-	if ($status = "200") {
+	if ($status != "503") {
 			proxy_pass       http://diy-phantomjs4so.rhcloud.com;
 		}
     if ($status = "503") {
 			proxy_pass       http://main;
-		}
-	
-	if ($status = "404") {
-			proxy_pass       http://diy-phantomjs4so.rhcloud.com;
 		}
     proxy_set_header Host diy-phantomjs4so.rhcloud.com;
 	proxy_cache RUBYGEMS;
