@@ -131,10 +131,10 @@ http {
 	
 	server {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15013;
-  server_name diy2-elasa2.rhcloud.com;
+  server_name diy-elasa2.rhcloud.com;
   location ~* ^/(.*) {
-    proxy_pass       http://diy2-elasa2.rhcloud.com;
-    proxy_set_header Host diy2-elasa2.rhcloud.com;
+    proxy_pass       http://diy-elasa2.rhcloud.com;
+    proxy_set_header Host diy-elasa2.rhcloud.com;
 	proxy_cache RUBYGEMS;
       proxy_cache_valid 200 302 365d;
       proxy_cache_valid 404 1m;
