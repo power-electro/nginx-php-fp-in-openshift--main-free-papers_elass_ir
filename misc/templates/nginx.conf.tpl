@@ -101,7 +101,10 @@ http {
   if ($status = "200") {
 			 proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		}
-    if ($status != "200") {
+    if ($status = "503") {
+			proxy_pass       http://main;
+		}
+	if ($status = "502") {
 			proxy_pass       http://main;
 		}
     #proxy_pass       http://diy-tornado4ss.rhcloud.com;
@@ -119,10 +122,12 @@ http {
   if ($status = "200") {
 			proxy_pass http://diy2-elasa2.rhcloud.com;
 		}
-    if ($status != "200") {
+    if ($status = "503") {
 			proxy_pass       http://main;
 		}
-    
+	if ($status = "502") {
+			proxy_pass       http://main;
+		}
     proxy_set_header Host diy2-elasa2.rhcloud.com;
 	proxy_cache RUBYGEMS;
       proxy_cache_valid 200 302 365d;
@@ -136,7 +141,10 @@ http {
 	if ($status = "200") {
 			proxy_pass       http://diy-phantomjs4so.rhcloud.com;
 		}
-    if ($status != "200") {
+    if ($status = "503") {
+			proxy_pass       http://main;
+		}
+	if ($status = "502") {
 			proxy_pass       http://main;
 		}
     proxy_set_header Host diy-phantomjs4so.rhcloud.com;
