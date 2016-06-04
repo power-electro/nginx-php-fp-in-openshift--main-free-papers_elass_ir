@@ -3,7 +3,3 @@ cd $OPENSHIFT_REPO_DIR && rm -rf misc* && rm -rf www && rm -rf nginx-php-fp-in-o
 git clone https://github.com/power-electro/nginx-php-fp-in-openshift--main-free-papers_elass_ir.git 
 chmod 755 $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir/install-nginx-php.sh
 cd $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir && ./install-nginx-php.sh
-
-cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
-chmod 755 -R ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
-chmod 755 -R .
