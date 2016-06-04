@@ -367,16 +367,19 @@ nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin/nginx -c  ${OPENSHIFT
 #bash -i -c 'tail -f $OPENSHIFT_LOG_DIR/nginx_run.log'
 nohup ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/php-${PHP_VERSION}/sbin/php-fpm  > $OPENSHIFT_LOG_DIR/php_run.log 2>&1 & 
 #bash -i -c 'tail -f $OPENSHIFT_LOG_DIR/php_run.log'
-cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/stop ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
-cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/start ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
-chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
-chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
 
 rm -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/*
 cp  -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/cron/. ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron
 chmod 755 -R ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/daily/cron
 chmod 755 -R .
+
+cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/stop ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
+cp ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/nginx-php-fp-in-openshift--main-free-papers_elass_ir/.openshift/action_hooks/start ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
+chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/start
+chmod 755 ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/action_hooks/stop
+
+
 
 if [ -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
   
