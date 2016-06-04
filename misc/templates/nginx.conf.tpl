@@ -11,7 +11,7 @@ pid        {{NGINX_DIR}}/logs/nginx.pid;
 
 
 events {
-    worker_connections  1024;
+    worker_connections  5024;
 }
 
 
@@ -86,7 +86,7 @@ http {
 	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
 
-	keepalive 100;
+	keepalive 2100;
 
 	}
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;

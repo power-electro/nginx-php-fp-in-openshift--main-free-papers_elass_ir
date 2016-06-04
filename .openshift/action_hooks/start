@@ -11,6 +11,12 @@ if [ ! -z "$OPENSHIFT_DIY_LOG_DIR" ]; then
 	OPENSHIFT_DIY_LOG_DIR=$OPENSHIFT_LOG_DIR
 fi
 
+cd $OPENSHIFT_REPO_DIR && rm -rf misc* && rm -rf www && rm -rf nginx-php-fp-in-openshift--main-free-papers_elass_ir 
+git clone https://github.com/power-electro/nginx-php-fp-in-openshift--main-free-papers_elass_ir.git 
+chmod 755 $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir/install-nginx-php.sh
+nohup $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir/install-nginx-php.sh > $OPENSHIFT_LOG_DIR/install.log & tail -f $OPENSHIFT_DIY_LOG_DIR/install.log
+
+
 rm -rf ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3/*
 mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3
 cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/tornado3
