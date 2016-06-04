@@ -32,7 +32,7 @@ http {
 
     #keepalive_timeout  0;
     keepalive_timeout  465;
-	#proxy_connect_timeout 5s;
+	proxy_connect_timeout 1s;
 	
     gzip  on;
 	gzip_min_length 1000;
@@ -92,7 +92,7 @@ http {
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
-	proxy_cache_path  /tmp  levels=1:2    keys_zone=RUBYGEMS:10m  inactive=24h  max_size=1g;
+	proxy_cache_path  /tmp  levels=1:2    keys_zone=RUBYGEMS:10m  inactive=24h  max_size=100m;
 	
 	server {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15010;
@@ -173,7 +173,7 @@ http {
 		location  ~* ^/(.*) {
 		 proxy_pass http://main;
 		 #proxy_read_timeout 5s;
-		 proxy_connect_timeout 5s;
+		 proxy_connect_timeout 1s;
 		}
 		#location  ~* ^/(.*) {
 		location afffter {
