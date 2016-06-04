@@ -102,9 +102,9 @@ http {
 		proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		
 		}
-  if ($status = "500") {
-			proxy_pass       http://main;
-			}
+  #if ($status = "500") {
+	#		proxy_pass       http://main;
+	#		}
   if ($status = "503") {
 			proxy_pass       http://main;
 		}
@@ -127,9 +127,9 @@ http {
 		proxy_pass       http://diy2-elasa2.rhcloud.com;
 		
 		}
-  if ($status = "500") {
-			proxy_pass       http://main;
-			}
+  #if ($status = "500") {
+	#		proxy_pass       http://main;
+	#		}
   if ($status = "503") {
 			proxy_pass       http://main;
 		}
@@ -148,9 +148,9 @@ http {
 		proxy_pass       http://diy-phantomjs4so.rhcloud.com;
 		
 		}
-	if ($status = "500") {
-			proxy_pass       http://main;
-			}
+	#if ($status = "500") {
+	#		proxy_pass       http://main;
+	#		}
   if ($status = "503") {
 			proxy_pass       http://main;
 		}
