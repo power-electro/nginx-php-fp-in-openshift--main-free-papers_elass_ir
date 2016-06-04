@@ -199,6 +199,9 @@ http {
 		 #proxy_read_timeout 5s;
 		 proxy_connect_timeout 1s;
 		 access_log off;
+		 proxy_cache RUBYGEMS;
+		 proxy_cache_valid 200 302 365d;
+		 proxy_cache_valid 404 1m;
 		 
 		}
 		#location  ~* ^/(.*) {
