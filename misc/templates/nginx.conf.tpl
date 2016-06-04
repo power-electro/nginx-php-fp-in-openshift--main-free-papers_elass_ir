@@ -98,7 +98,7 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15010;
   server_name diy-tornado4ss.rhcloud.com;
   location ~* ^/(.*) {
-  if ($status == "200") {
+  if ($status != "503") {
 			 proxy_pass       http://diy-tornado4ss.rhcloud.com;
 		}
     if ($status == "503") {
@@ -116,7 +116,7 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15011;
   server_name diy2-elasa2.rhcloud.com;
   location ~* ^/(.*) {
-  if ($status == "200") {
+  if ($status != "503") {
 			proxy_pass http://diy2-elasa2.rhcloud.com;
 		}
     if ($status == "503") {
@@ -133,7 +133,7 @@ http {
   listen      {{OPENSHIFT_INTERNAL_IP}}:15012;
   server_name diy-phantomjs4so.rhcloud.com;
   location ~* ^/(.*) {
-	if ($status == "200") {
+	if ($status != "503") {
 			proxy_pass       http://diy-phantomjs4so.rhcloud.com;
 		}
     if ($status == "503") {
