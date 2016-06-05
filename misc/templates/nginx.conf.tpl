@@ -86,7 +86,7 @@ http {
 	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
 	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
 	#server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
-	max_connections 3;
+	#max_connections 3;
 	keepalive 2100;
 
 	}

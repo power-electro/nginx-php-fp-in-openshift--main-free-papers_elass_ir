@@ -102,6 +102,13 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	
 	git clone https://github.com/ezmobius/nginx-ey-balancer.git
 	
+	#cd $OPENSHIFT_TMP_DIR/nginx-ey-balancer
+	#mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
+	#chmod 755 config
+	#./config --prefix=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
+	
+	#make && make install && make clean
+	
 	wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 	tar zxf nginx-${NGINX_VERSION}.tar.gz
 	rm -rf nginx-${NGINX_VERSION}.tar.gz
@@ -138,7 +145,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-file-aio\
 	   --with-ipv6	\
 	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair\
-	   --add-module=$OPENSHIFT_TMP_DIR/nginx-ey-balancer
+	  # --add-module=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
 	   
 	   #--add-module=$OPENSHIFT_TMP_DIR/ngx_pagespeed-release-${NPS_VERSION}-beta\
 	   #--add-module=$OPENSHIFT_TMP_DIR/healthcheck_nginx_upstreams\
