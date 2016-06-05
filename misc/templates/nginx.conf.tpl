@@ -208,7 +208,7 @@ http {
 		 proxy_cache RUBYGEMS;
 		 proxy_cache_valid 200 302 365d;
 		 proxy_cache_valid 404 1m;
-		 health_check match=welcome;
+		 #health_check match=welcome;
 		 
 		}
 		#location  ~* ^/(.*) {
