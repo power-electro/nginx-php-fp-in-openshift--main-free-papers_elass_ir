@@ -121,7 +121,6 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-zlib=$OPENSHIFT_TMP_DIR/zlib-${ZLIB_VERSION}\
 	   --with-http_ssl_module\
 	   --with-http_geoip_module\
-	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair\	   
 	   --with-http_realip_module \
 	   --with-http_addition_module \
 	   --with-http_sub_module\
@@ -136,7 +135,9 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-mail \
 	   --with-mail_ssl_module \
 	   --with-file-aio\
-	   --with-ipv6	
+	   --with-ipv6	\
+	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair
+	   
 	   #--add-module=$OPENSHIFT_TMP_DIR/ngx_pagespeed-release-${NPS_VERSION}-beta\
 	   #--add-module=$OPENSHIFT_TMP_DIR/healthcheck_nginx_upstreams\
 	   make && make install && make clean   # " > $OPENSHIFT_LOG_DIR/Nginx_config.log 2>&1 & 
