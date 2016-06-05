@@ -89,7 +89,7 @@ http {
 	keepalive 2100;
 
 	}
-	 match welcome {
+	match welcome {
         status 200;
         #header Content-Type = text/html;
         #body ~ "Welcome to nginx!";
