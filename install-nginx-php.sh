@@ -2,7 +2,8 @@
 
 PYTHON_VERSION="2.7.4"
 PCRE_VERSION="8.35"
-NGINX_VERSION="1.6.0"
+#NGINX_VERSION="1.6.0"
+NGINX_VERSION="1.10.1"
 MEMCACHED_VERSION="1.4.15"
 ZLIB_VERSION="1.2.8"
 #PHP_VERSION="5.5.9"
@@ -88,7 +89,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	cd $OPENSHIFT_TMP_DIR
 	wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 	tar zxf nginx-${NGINX_VERSION}.tar.gz
-	rm zxf nginx-${NGINX_VERSION}.tar.gz
+	rm -rf nginx-${NGINX_VERSION}.tar.gz
 	wget http://ftp.cs.stanford.edu/pub/exim/pcre/pcre-${PCRE_VERSION}.tar.gz
 	#wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${PCRE_VERSION}.tar.gz
 	tar zxf pcre-${PCRE_VERSION}.tar.gz
