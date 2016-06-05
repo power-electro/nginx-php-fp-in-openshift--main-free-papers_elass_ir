@@ -7,3 +7,4 @@ cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/d*
 #tail -f $OPENSHIFT_DIY_LOG_DIR/install.log
 
 cd $OPENSHIFT_REPO_DIR/nginx-php-fp-in-openshift--main-free-papers_elass_ir && ./install-nginx-php.sh
+cd ${OPENSHIFT_HOMEDIR}/app-root/runtime/repo/.openshift/cron/d*
