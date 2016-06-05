@@ -100,6 +100,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	#rm ${NPS_VERSION}.tar.gz
 	git clone https://github.com/gnosek/nginx-upstream-fair.git
 	
+	git clone https://github.com/ezmobius/nginx-ey-balancer.git
 	
 	wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 	tar zxf nginx-${NGINX_VERSION}.tar.gz
@@ -136,7 +137,8 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-mail_ssl_module \
 	   --with-file-aio\
 	   --with-ipv6	\
-	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair
+	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair\
+	   --add-module=$OPENSHIFT_TMP_DIR/nginx-ey-balancer
 	   
 	   #--add-module=$OPENSHIFT_TMP_DIR/ngx_pagespeed-release-${NPS_VERSION}-beta\
 	   #--add-module=$OPENSHIFT_TMP_DIR/healthcheck_nginx_upstreams\
