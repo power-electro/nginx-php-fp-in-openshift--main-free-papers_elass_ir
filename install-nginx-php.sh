@@ -249,6 +249,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 	cd
 	echo '---instlling tornado -----'
 	#nohup sh -c "\
+	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install pypdftk && \
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install docutils && \
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install httplib2 && \
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install hurry.filesize && \
