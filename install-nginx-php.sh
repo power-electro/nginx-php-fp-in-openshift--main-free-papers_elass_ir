@@ -369,6 +369,14 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 
 fi
 
+if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/cpdf ]; then
+	echo "installing cpdf"
+	mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/cpdf
+	cd  ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/cpdf
+	git clone https://github.com/coherentgraphics/cpdf-binaries.git
+	mv cpdf-binaries/Linux-Intel-64bit/* .
+	rm -rf cpdf-binaries
+fi
 # echo 'Make uwsgi '
 cd $OPENSHIFT_TMP_DIR
 if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python ]; then
