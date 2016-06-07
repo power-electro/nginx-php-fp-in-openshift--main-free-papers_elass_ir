@@ -90,11 +90,11 @@ http {
 	keepalive 2100;
 
 	}
-	#match welcome {
-    #    status 200;
+	match welcome {
+         status 200;
     #    #header Content-Type = text/html;
     #    #body ~ "Welcome to nginx!";
-    #}
+    }
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
@@ -208,7 +208,7 @@ http {
 		 proxy_cache RUBYGEMS;
 		 proxy_cache_valid 200 302 365d;
 		 proxy_cache_valid 404 1m;
-		 #health_check match=welcome;
+		 health_check match=welcome;
 		 
 		}
 		#location  ~* ^/(.*) {

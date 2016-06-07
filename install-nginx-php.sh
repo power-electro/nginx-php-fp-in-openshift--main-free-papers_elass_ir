@@ -87,28 +87,6 @@ rm -rf $OPENSHIFT_TMP_DIR/*
 
 if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then	
 	cd $OPENSHIFT_TMP_DIR
-	git clone https://github.com/cep21/healthcheck_nginx_upstreams.git
-	
-	
-	#NPS_VERSION=1.11.33.2
-	#wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip
-	#unzip release-${NPS_VERSION}-beta.zip
-	#rm release-${NPS_VERSION}-beta.zip
-	#cd ngx_pagespeed-release-${NPS_VERSION}-beta/
-	#wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
-	#tar -xzvf ${NPS_VERSION}.tar.gz  # extracts to psol/
-	#rm ${NPS_VERSION}.tar.gz
-	git clone https://github.com/gnosek/nginx-upstream-fair.git
-	
-	git clone https://github.com/ezmobius/nginx-ey-balancer.git
-	
-	#cd $OPENSHIFT_TMP_DIR/nginx-ey-balancer
-	#mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
-	#chmod 755 config
-	#./config --prefix=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
-	
-	#make && make install && make clean
-	
 	wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 	tar zxf nginx-${NGINX_VERSION}.tar.gz
 	rm -rf nginx-${NGINX_VERSION}.tar.gz
@@ -122,6 +100,44 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
     if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx ]; then
       mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx
     fi
+	cd nginx-${NGINX_VERSION}
+	
+	cd $OPENSHIFT_TMP_DIR
+	#git clone https://github.com/cep21/healthcheck_nginx_upstreams.git
+	
+	
+	#NPS_VERSION=1.11.33.2
+	#wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip
+	#unzip release-${NPS_VERSION}-beta.zip
+	#rm release-${NPS_VERSION}-beta.zip
+	#cd ngx_pagespeed-release-${NPS_VERSION}-beta/
+	#wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
+	#tar -xzvf ${NPS_VERSION}.tar.gz  # extracts to psol/
+	#rm ${NPS_VERSION}.tar.gz
+	#git clone https://github.com/gnosek/nginx-upstream-fair.git
+	
+	git clone https://github.com/ezmobius/nginx-ey-balancer.git
+	
+	#cd $OPENSHIFT_TMP_DIR/nginx-ey-balancer
+	#mkdir ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
+	#chmod 755 config
+	#./config --prefix=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
+	
+	#make && make install && make clean
+	
+	cd $OPENSHIFT_TMP_DIR
+	#git clone https://github.com/yaoweibin/nginx_upstream_check_module.git #patched for newer version
+	git clone https://github.com/power-electro/nginx_upstream_check_module.git
+	cd nginx-${NGINX_VERSION}
+	patch -p1 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/check_1.9.2+.patch
+	
+	cd $OPENSHIFT_TMP_DIR
+	git clone https://github.com/gnosek/nginx-upstream-fair.git
+	cd nginx-upstream-fair
+	patch -p2 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/upstream_fair.patch
+	
+	cd $OPENSHIFT_TMP_DIR
+	
 	cd nginx-${NGINX_VERSION}	
 	./configure\
 	   --prefix=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx\
@@ -145,6 +161,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-file-aio\
 	   --with-ipv6	\
 	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair\
+	   --add-module=$OPENSHIFT_TMP_DIR/nginx_upstream_check_module
 	  # --add-module=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
 	   
 	   #--add-module=$OPENSHIFT_TMP_DIR/ngx_pagespeed-release-${NPS_VERSION}-beta\
