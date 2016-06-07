@@ -82,9 +82,9 @@ http {
 	
 	upstream main {
 	fair;
-	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s; #
-	server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s;
-	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s;
+	server {{OPENSHIFT_INTERNAL_IP}}:15010 weight=1 fail_timeout=1s; #diy-tornado4ss.rhcloud.com
+	#server {{OPENSHIFT_INTERNAL_IP}}:15011 weight=1 fail_timeout=1s; #diy2-elasa2.rhcloud.com
+	server {{OPENSHIFT_INTERNAL_IP}}:15012 weight=1 fail_timeout=1s; #diy-phantomjs4so.rhcloud.com
 	#server {{OPENSHIFT_INTERNAL_IP}}:15013 weight=1 fail_timeout=1s;
 	#max_connections 3;
 	keepalive 2100;
