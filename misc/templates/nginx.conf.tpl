@@ -91,7 +91,7 @@ http {
 
 	}
 	#match welcome {
-         status 200;
+    #     status 200;
     #    #header Content-Type = text/html;
     #    #body ~ "Welcome to nginx!";
     #}
