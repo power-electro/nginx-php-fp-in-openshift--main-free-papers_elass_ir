@@ -90,6 +90,11 @@ http {
 	keepalive 2100;
 
 	}
+	#match welcome {
+         status 200;
+    #    #header Content-Type = text/html;
+    #    #body ~ "Welcome to nginx!";
+    #}
 	
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
@@ -204,7 +209,7 @@ http {
 		 proxy_cache RUBYGEMS;
 		 proxy_cache_valid 200 302 365d;
 		 proxy_cache_valid 404 1m;
-		 health_check match=welcome;
+		 #health_check match=welcome;
 		 
 		}
 		#location  ~* ^/(.*) {
@@ -487,11 +492,7 @@ http {
         #}
     }
 	
-	match welcome {
-         status 200;
-    #    #header Content-Type = text/html;
-    #    #body ~ "Welcome to nginx!";
-    }
+	
 
     # another virtual host using mix of IP-, name-, and port-based configuration
     #

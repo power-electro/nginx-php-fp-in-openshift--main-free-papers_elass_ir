@@ -129,12 +129,12 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	#git clone https://github.com/yaoweibin/nginx_upstream_check_module.git #patched for newer version
 	git clone https://github.com/power-electro/nginx_upstream_check_module.git
 	cd nginx-${NGINX_VERSION}
-	patch -p1 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/check_1.9.2+.patch
+	#patch -p1 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/check_1.9.2+.patch
 	
 	cd $OPENSHIFT_TMP_DIR
 	git clone https://github.com/gnosek/nginx-upstream-fair.git
 	cd nginx-upstream-fair
-	patch -p2 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/upstream_fair.patch
+	#patch -p2 < $OPENSHIFT_TMP_DIR/nginx_upstream_check_module/upstream_fair.patch
 	
 	cd $OPENSHIFT_TMP_DIR
 	
@@ -160,8 +160,8 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/sbin ]; then
 	   --with-mail_ssl_module \
 	   --with-file-aio\
 	   --with-ipv6	\
-	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair\
-	   --add-module=$OPENSHIFT_TMP_DIR/nginx_upstream_check_module
+	   --add-module=$OPENSHIFT_TMP_DIR/nginx-upstream-fair
+	   #--add-module=$OPENSHIFT_TMP_DIR/nginx_upstream_check_module
 	  # --add-module=${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/nginx/nginx-ey-balancer
 	   
 	   #--add-module=$OPENSHIFT_TMP_DIR/ngx_pagespeed-release-${NPS_VERSION}-beta\
