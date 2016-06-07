@@ -90,11 +90,7 @@ http {
 	keepalive 2100;
 
 	}
-	match welcome {
-         status 200;
-    #    #header Content-Type = text/html;
-    #    #body ~ "Welcome to nginx!";
-    }
+	
 	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 	limit_req_zone $binary_remote_addr zone=one2:10m rate=1r/m;
 	limit_req_zone $http_x_forwarded_for zone=one3:10m rate=1r/m;
@@ -389,51 +385,51 @@ http {
         rewrite ^/(.*)$ /index.php?routestring=$1 break;
         }
     
-    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass   {{OPENSHIFT_INTERNAL_IP}}:9000;
-    #fastcgi_pass   unix:/tmp/php5-fpm.sock;
-    fastcgi_index  index.php;
-    #fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-    fastcgi_param  SCRIPT_FILENAME    $request_filename;
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass   {{OPENSHIFT_INTERNAL_IP}}:9000;
+		#fastcgi_pass   unix:/tmp/php5-fpm.sock;
+		fastcgi_index  index.php;
+		#fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		fastcgi_param  SCRIPT_FILENAME    $request_filename;
 
-fastcgi_connect_timeout 60;
-fastcgi_send_timeout 180;
-fastcgi_read_timeout 180;
-fastcgi_buffer_size 256k;
-fastcgi_buffers 4 256k;
-fastcgi_busy_buffers_size 256k;
-fastcgi_temp_file_write_size 256k;
-fastcgi_intercept_errors on;
-#fastcgi_param HTTPS on;
-
-fastcgi_param  PATH_INFO          $fastcgi_path_info;
-fastcgi_param  PATH_TRANSLATED    $document_root$fastcgi_path_info;
-
-fastcgi_param  QUERY_STRING       $query_string;
-fastcgi_param  REQUEST_METHOD     $request_method;
-fastcgi_param  CONTENT_TYPE       $content_type;
-fastcgi_param  CONTENT_LENGTH     $content_length;
-
-fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
-fastcgi_param  REQUEST_URI        $request_uri;
-fastcgi_param  DOCUMENT_URI       $document_uri;
-fastcgi_param  DOCUMENT_ROOT      $document_root;
-fastcgi_param  SERVER_PROTOCOL    $server_protocol;
-
-fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
-#fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
-
-fastcgi_param  REMOTE_ADDR        $remote_addr;
-fastcgi_param  REMOTE_PORT        $remote_port;
-fastcgi_param  SERVER_ADDR        $server_addr;
-fastcgi_param  SERVER_PORT        $server_port;
-fastcgi_param  SERVER_NAME        $server_name;
-
-# PHP only, required if PHP was built with --enable-force-cgi-redirect
-fastcgi_param  REDIRECT_STATUS    200;
-
-}
-        #error_page  404              /404.html;
+		fastcgi_connect_timeout 60;
+		fastcgi_send_timeout 180;
+		fastcgi_read_timeout 180;
+		fastcgi_buffer_size 256k;
+		fastcgi_buffers 4 256k;
+		fastcgi_busy_buffers_size 256k;
+		fastcgi_temp_file_write_size 256k;
+		fastcgi_intercept_errors on;
+		#fastcgi_param HTTPS on;
+		
+		fastcgi_param  PATH_INFO          $fastcgi_path_info;
+		fastcgi_param  PATH_TRANSLATED    $document_root$fastcgi_path_info;
+		
+		fastcgi_param  QUERY_STRING       $query_string;
+		fastcgi_param  REQUEST_METHOD     $request_method;
+		fastcgi_param  CONTENT_TYPE       $content_type;
+		fastcgi_param  CONTENT_LENGTH     $content_length;
+		
+		fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
+		fastcgi_param  REQUEST_URI        $request_uri;
+		fastcgi_param  DOCUMENT_URI       $document_uri;
+		fastcgi_param  DOCUMENT_ROOT      $document_root;
+		fastcgi_param  SERVER_PROTOCOL    $server_protocol;
+		
+		fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
+		#fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+		
+		fastcgi_param  REMOTE_ADDR        $remote_addr;
+		fastcgi_param  REMOTE_PORT        $remote_port;
+		fastcgi_param  SERVER_ADDR        $server_addr;
+		fastcgi_param  SERVER_PORT        $server_port;
+		fastcgi_param  SERVER_NAME        $server_name;
+		
+		# PHP only, required if PHP was built with --enable-force-cgi-redirect
+		fastcgi_param  REDIRECT_STATUS    200;
+		
+		}
+		#error_page  404              /404.html;
 
         # redirect server error pages to the static page /50x.html
         #
@@ -490,7 +486,12 @@ fastcgi_param  REDIRECT_STATUS    200;
         #    deny  all;
         #}
     }
-
+	
+	match welcome {
+         status 200;
+    #    #header Content-Type = text/html;
+    #    #body ~ "Welcome to nginx!";
+    }
 
     # another virtual host using mix of IP-, name-, and port-based configuration
     #
