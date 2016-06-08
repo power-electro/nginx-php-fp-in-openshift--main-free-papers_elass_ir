@@ -266,6 +266,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 	cd
 	echo '---instlling tornado -----'
 	#nohup sh -c "\
+	#${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install htmlunit
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install pyPdf && \
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install pypdftk && \
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install docutils && \
@@ -295,6 +296,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install requesocks==0.10.8 && \	
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install requests==2.4.1 #"> $OPENSHIFT_LOG_DIR/python_modules_install_1.log /dev/null 2>&1 &  
 	#tail -f  $OPENSHIFT_LOG_DIR/python_modules_install_1.log
+	
 	#install pdf logo removal (pdfparanoia)
 	
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install uwsgi 
@@ -308,7 +310,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install dpath
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install pygoogle
 	
-	
+	: '
 	nohup sh -c "\	
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install uwsgi  && \	
 	${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin/easy_install cookielib"> $OPENSHIFT_LOG_DIR/python_modules_install_1_1.log /dev/null 2>&1 &  
@@ -383,7 +385,7 @@ if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/python/bin ]; then
 	#wget balabal
 	#unzip bala
 	
-
+	'
 fi
 
 if [ ! -d ${OPENSHIFT_HOMEDIR}/app-root/runtime/srv/cpdf ]; then
